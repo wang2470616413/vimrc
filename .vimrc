@@ -4,7 +4,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
 set nu
-syntax on
+syntax on     "开启高亮"
 set wildmenu
 set cindent
 set hlsearch
