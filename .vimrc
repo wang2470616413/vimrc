@@ -3,12 +3,60 @@ filetype off                  " required
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
+inoremap <C-c> <Esc>
 set nu
 syntax on     "开启高亮"
-set wildmenu
+set nocompatible "去掉vi特性"
+set backspace=indent,eol,start "设置backspace在插入模式下删除"
+"set wildmenu  "ceshi"
 set cindent
 set hlsearch
 set rtp+=~/.vim/bundle/Vundle.vim
+set ruler "打开状态栏标尺"
+set whichwrap+=<,>,h,l "允许backspace和光标跨行
+set mouse=a "鼠标定位"
+"自动补全
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap < <><ESC>i
+:inoremap > <c-r>=ClosePair('>')<CR>
+:inoremap { {<CR>}<ESC>O
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+:inoremap " ""<ESC>i
+:inoremap ' ''<ESC>i
+function! ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+"c,c++F11编译运行 ~31"
+map <F11> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!java %<"
+    elseif &filetype == 'sh'
+        :!./%
+    endif
+endfunc 
+"c,c++F5调试 ~38:”
+map <F5> :call Rungdb()<CR>
+func! Rungdb()
+	exec "w"
+	exec "!g++ % -g -o %<"
+	exec "!gdb ./%<"
+endfunc
 call vundle#begin()
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
