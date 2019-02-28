@@ -14,12 +14,10 @@ set hlsearch
 set rtp+=~/.vim/bundle/Vundle.vim
 set ruler "打开状态栏标尺"
 set whichwrap+=<,>,h,l "允许backspace和光标跨行
-set mouse=a "鼠标定位"
+""set mouse=a "鼠标定位"
 "自动补全
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap < <><ESC>i
-:inoremap > <c-r>=ClosePair('>')<CR>
 :inoremap { {<CR>}<ESC>O
 :inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
@@ -57,6 +55,14 @@ func! Rungdb()
 	exec "!g++ % -g -o %<"
 	exec "!gdb ./%<"
 endfunc
+"vim提交到githu"
+map <F1> :call SubmitByGithub()<CR>
+func! SubmitByGithub()
+    exec "w"
+    exec "!git add %"
+    exec "!git commit -m '%'"
+    exec "!git push origin master"
+endfunc 
 call vundle#begin()
 Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
