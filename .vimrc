@@ -11,7 +11,7 @@ set backspace=indent,eol,start "设置backspace在插入模式下删除"
 "set wildmenu  "ceshi"
 set cindent
 set hlsearch
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 set ruler "打开状态栏标尺"
 set whichwrap+=<,>,h,l "允许backspace和光标跨行
 ""set mouse=a "鼠标定位"
